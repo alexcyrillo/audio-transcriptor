@@ -28,9 +28,14 @@ def clean_temp_files():
       os.remove(f"temp_part_{i}.mp3")
 
 def save_transcription(transcription, file_name):
-  if os.path.exists(f"transcricoes/{file_name}.txt"):
-    os.remove(f"transcricoes/{file_name}.txt")
-  f = open(f"transcricoes/{file_name}.txt", "x")
+  if not os.path.exists("transcriptions"):
+    os.makedirs("transcriptions")
+
+  file_path = f"transcriptions/{file_name}.txt"
+
+  if os.path.exists(file_path):
+    os.remove(file_path)
+  f = open(file_path, "x", encoding="utf-8")
   f.write(transcription)
   f.close()
 
